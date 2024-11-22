@@ -8,18 +8,16 @@
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
 
-    <title>Pagina Agregar Citas</title>
+    <title>Pagina Editar Paciente</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-    <style>
-    body {
-      overflow-x: hidden;
-  }</style>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
-  <body >
-    
-    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      style="--radio-dot-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(17,23,23)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e'); font-family: Manrope, &quot;Noto Sans&quot;, sans-serif;"
+    >
       <div class="layout-container flex h-full grow flex-col">
         <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf3] px-10 py-3">
           <div class="flex items-center gap-4 text-[#0e141b]">
@@ -39,7 +37,7 @@
             <div class="flex items-center gap-9">
               <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="P_Pacientes.html">pacientes</a>
               <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="p.empleados.html">Empleados</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-extrabold leading-normal" href="pagina_Cita.html">Citas</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="pagina_Cita.html">Citas</a>
               <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="P.historialMedico.html">Historial Medico</a>
               <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="inicio.html">Inicio</a>
             </div>
@@ -50,20 +48,15 @@
             ></div>
           </div>
         </header>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
- 
-        </header>
+        
         <div class="px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4">
-              <p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight min-w-72">NUEVA CITA</p>
-            </div>
+            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight min-w-72">Editar Empleado</p></div>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Del Paciente</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. Identidad</p>
                 <input
-                  placeholder="Enter patient's name"
+                  placeholder="e.g. (555) 555-5555"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
@@ -71,9 +64,9 @@
             </div>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Identidad Del Paciente</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Completo</p>
                 <input
-                  placeholder="xxxxxxxxxxxx"
+                  placeholder="Oscar oliva"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
@@ -81,30 +74,48 @@
             </div>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha/Hora</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha De Nacimiento</p>
                 <input
-                  placeholder="MM/DD/YYYY  HH:MM AM/PM"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-              
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Del Hospital</p>
-                <input
-                  placeholder="Escribe El Nombre del Hospital"
+                  placeholder="01/01/1990"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
               </label>
             </div>
+            <div class="flex flex-col gap-3 p-4">
+              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
+                <input
+                  type="radio"
+                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
+                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
+                  checked=""
+                />
+                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Hombre</p></div>
+              </label>
+              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
+                <input
+                  type="radio"
+                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
+                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
+                />
+                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Mujer</p></div>
+              </label>
+              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
+                <input
+                  type="radio"
+                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
+                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
+                />
+                
+                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Pref. No Decir</p></div>
+              </label>
+            </div>
+            
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Especialidad</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Telefono</p>
                 <input
-                  placeholder="General"
+                  placeholder="e.g. (555) 555-5555"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
@@ -112,28 +123,51 @@
             </div>
             <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Razon de visita</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Correo </p>
                 <input
-                  placeholder="Escribe la razon de la visita"
+                  placeholder="e.g. janedoe@example.com"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
               </label>
             </div>
            
-            <div class="flex px-4 py-3 justify-end flex space-x-2">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#20dfcc] text-[#111717] text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Guardar</span>
-              </button>
-              
-              <button
-              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7edf3] text-[#0e141b] text-sm font-bold leading-normal tracking-[0.015em]"
-                style="border: 1px solid #616161;">
-              <span class="truncate">Generar factura</span>
-            </button>
+            
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Emergencia</p>
+                <input
+                  placeholder="xxxxxxxxxxxxxxx"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
             </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label class="flex flex-col min-w-40 flex-1">
+                  <p class="text-[#111717] text-base font-medium leading-normal pb-2">Cargo</p>
+                  <textarea
+                    placeholder="Ninguna"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                    ></textarea>
+                </label>
+              </div>
+              <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label class="flex flex-col min-w-40 flex-1">
+                  <p class="text-[#111717] text-base font-medium leading-normal pb-2">Especialidad</p>
+                  <textarea
+                    placeholder="Ninguna"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                    ></textarea>
+                </label>
+              </div>
+              <div class="flex px-4 py-3">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 flex-1 bg-[#13ecd6] text-[#111817] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                  <span class="truncate">Guardar</span>
+                </button>
+              </div>
             <div class="px-40 flex flex-1 justify-center py-5">
               <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                 <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">

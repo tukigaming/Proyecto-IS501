@@ -56,64 +56,14 @@ export class ManageAccount {
       console.log("Datos guardados correctamente:", nuevoDocRef.id);
   
       localStorage.setItem('userID', uid);
-      window.location.href = "./P_Principal.html"
+      window.location.href = "inicio.html"
 
-      function actualizarContador(uid) {
-        const db = firebase.firestore();
-        const increment = firebase.firestore.FieldValue.increment(1);
-        const decrement = firebase.firestore.FieldValue.increment(-1);
-    
-        const storyRef = db.collection('contador').doc(uid).collection('contador2');
+      
         
     
-        // Incrementa el contador
-        
-        // Verificar el estado actual del contador en Firestore
-        storyRef.get()
-            .then((doc) => {
-                if (doc.exists) {
-                    // El documento existe, obtener el valor actual del contador
-                    const count = doc.data().count;
-    
-                    // Actualizar el contador en Firestore alternando entre incremento y decremento
-                    if (count % 2 === 0) {
-                        // Si el contador es par, incrementar
-                        storyRef.update({ count: increment })
-                            .then(() => {
-                                console.log('Contador incrementado en Firestore');
-                            })
-                            .catch((error) => {
-                                console.error('Error al incrementar el contador:', error);
-                            });
-                    } else {
-                        // Si el contador es impar, decrementar
-                        storyRef.update({ count: decrement })
-                            .then(() => {
-                                console.log('Contador decrementado en Firestore');
-                            })
-                            .catch((error) => {
-                                console.error('Error al decrementar el contador:', error);
-                            });
-                    }
-                } else {
-                    // El documento no existe, inicializar el contador en 1
-                    storyRef.set({ count: 1 })
-                        .then(() => {
-                            console.log('Contador inicializado en Firestore');
-                        })
-                        .catch((error) => {
-                            console.error('Error al inicializar el contador:', error);
-                        });
-                }
-            })
-            .catch((error) => {
-                console.error('Error al obtener el contador:', error);
-            });
     }
 
-    actualizarContador2(userID, documento);
     
-  }
   
 
 

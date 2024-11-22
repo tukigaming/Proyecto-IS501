@@ -11,19 +11,28 @@
     <title>Galileo Design</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <style>
-    body {
-      overflow-x: hidden;
-  }</style>
+      body {
+        overflow-x: hidden;
+      }
+    </style>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
-  <body >
-    
-    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden"
+      style="font-family: Inter, 'Noto Sans', sans-serif"
+    >
       <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf3] px-10 py-3">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf3] px-10 py-3"
+        >
           <div class="flex items-center gap-4 text-[#0e141b]">
             <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
@@ -32,26 +41,41 @@
                 ></path>
               </svg>
             </div>
-            <h2 class="text-[#0e141b] text-lg font-bold leading-tight tracking-[-0.015em]">MediCare</h2>
+            <h2
+              class="text-[#0e141b] text-lg font-bold leading-tight tracking-[-0.015em]"
+            >
+              MediCare
+            </h2>
           </div>
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="#">pacientes</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="#">Empleados</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="#">Citas</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="#">Historial Medico</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-extrabold leading-normal" href="P_Pacientes.html">pacientes</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="p.empleados.html">Empleados</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="pagina_Cita.html">Citas</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="P.historialMedico.html">Historial Medico</a>
+              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="inicio.html">Inicio</a>
             </div>
-            
+
             <div
               class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://cdn.usegalileo.ai/stability/b8951bbb-4539-4798-bee6-7a9bc44b9ce9.png");'
+              style="
+                background-image: url('https://cdn.usegalileo.ai/stability/b8951bbb-4539-4798-bee6-7a9bc44b9ce9.png');
+              "
             ></div>
           </div>
         </header>
 
         <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight min-w-72">PACIENTES</p></div>
+          <div
+            class="layout-content-container flex flex-col max-w-[960px] flex-1"
+          >
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p
+                class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight min-w-72"
+              >
+                PACIENTES
+              </p>
+            </div>
             <div class="px-4 py-3">
               <label class="flex flex-col min-w-40 h-12 w-full">
                 <div class="flex w-full flex-1 items-stretch rounded-xl h-full">
@@ -61,7 +85,13 @@
                     data-size="24px"
                     data-weight="regular"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
                       <path
                         d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
                       ></path>
@@ -76,18 +106,30 @@
               </label>
             </div>
             <div class="px-4 py-3 @container">
-              <div class="flex overflow-hidden rounded-xl border border-[#d0dbe7] bg-slate-50">
+              <div
+                class="flex overflow-hidden rounded-xl border border-[#d0dbe7] bg-slate-50"
+              >
                 <table class="flex-1">
                   <thead>
                     <tr class="bg-slate-50">
-                      <th class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal">Nombre</th>
-                      <th class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal">
+                      <th
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal"
+                      >
+                        Nombre
+                      </th>
+                      <th
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal"
+                      >
                         ID
                       </th>
-                      <th class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal">
+                      <th
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal"
+                      >
                         Ultima Visita
                       </th>
-                      <th class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal">
+                      <th
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 px-4 py-3 text-left text-[#0e141b] w-[400px] text-sm font-medium leading-normal"
+                      >
                         Telefono
                       </th>
                       <th
@@ -97,89 +139,202 @@
                   </thead>
                   <tbody>
                     <tr class="border-t border-t-[#d0dbe7]">
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal"
+                      >
                         Luisa Mendoza
                       </td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">1234567</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        1234567
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
                         Edit/Delete
                       </td>
                     </tr>
                     <tr class="border-t border-t-[#d0dbe7]">
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal"
+                      >
                         Daniel Perez
                       </td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">1234568</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        1234568
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
                         Edit/Delete
                       </td>
                     </tr>
                     <tr class="border-t border-t-[#d0dbe7]">
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal"
+                      >
                         Maria Ramirez
                       </td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">1234569</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        1234569
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
                         Edit/Delete
                       </td>
                     </tr>
                     <tr class="border-t border-t-[#d0dbe7]">
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal"
+                      >
                         Sofia Lopez
                       </td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">1234570</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        1234570
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
                         Edit/Delete
                       </td>
                     </tr>
                     <tr class="border-t border-t-[#d0dbe7]">
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0e141b] text-sm font-normal leading-normal"
+                      >
                         Carlos Gomez
                       </td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">1234571</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal">3/15/22</td>
-                      <td class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]">
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        1234571
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 h-[72px] px-4 py-2 w-[400px] text-[#4e7397] text-sm font-normal leading-normal"
+                      >
+                        3/15/22
+                      </td>
+                      <td
+                        class="table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 h-[72px] px-4 py-2 w-60 text-[#4e7397] text-sm font-bold leading-normal tracking-[0.015em]"
+                      >
                         Edit/Delete
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              
+
               <style>
-                          @container(max-width:120px){.table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120{display: none;}}
-                @container(max-width:240px){.table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240{display: none;}}
-                @container(max-width:360px){.table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360{display: none;}}
-                @container(max-width:480px){.table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480{display: none;}}
+                @container (max-width:120px) {
+                  .table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-120 {
+                    display: none;
+                  }
+                }
+                @container (max-width:240px) {
+                  .table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-240 {
+                    display: none;
+                  }
+                }
+                @container (max-width:360px) {
+                  .table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-360 {
+                    display: none;
+                  }
+                }
+                @container (max-width:480px) {
+                  .table-292df680-bc36-4ded-a5e0-8a6857dd277c-column-480 {
+                    display: none;
+                  }
+                }
               </style>
             </div>
             <div class="flex px-4 py-3 justify-end">
-              <button
+              <a 
+                href="P.Registropaciente.html" 
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7edf3] text-[#0e141b] text-sm font-bold leading-normal tracking-[0.015em]"
-                style="border: 1px solid #272626;">
+                style="border: 1px solid #272626"
+              >
                 <span class="truncate">Agregar Paciente</span>
-              </button>
-              
+              </a>
             </div>
+            
             <div class="px-40 flex flex-1 justify-center py-5">
-              <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
-                  <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                    
-                  </div>
+              <div
+                class="layout-content-container flex flex-col max-w-[960px] flex-1"
+              >
+                <footer
+                  class="flex flex-col gap-6 px-5 py-10 text-center @container"
+                >
+                  <div
+                    class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
+                  ></div>
                   <div class="flex flex-wrap justify-center gap-4">
                     <a href="#">
-                      <div class="text-[#4f7296]" data-icon="GithubLogo" data-size="24px" data-weight="regular">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <div
+                        class="text-[#4f7296]"
+                        data-icon="GithubLogo"
+                        data-size="24px"
+                        data-weight="regular"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24px"
+                          height="24px"
+                          fill="currentColor"
+                          viewBox="0 0 256 256"
+                        >
                           <path
                             d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
                           ></path>
@@ -187,8 +342,19 @@
                       </div>
                     </a>
                     <a href="#">
-                      <div class="text-[#4f7296]" data-icon="LinkedinLogo" data-size="24px" data-weight="regular">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <div
+                        class="text-[#4f7296]"
+                        data-icon="LinkedinLogo"
+                        data-size="24px"
+                        data-weight="regular"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24px"
+                          height="24px"
+                          fill="currentColor"
+                          viewBox="0 0 256 256"
+                        >
                           <path
                             d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
                           ></path>
@@ -196,17 +362,17 @@
                       </div>
                     </a>
                   </div>
-                  <p class="text-[#4f7296] text-base font-normal leading-normal">By Alumnos IS501 </p>
+                  <p
+                    class="text-[#4f7296] text-base font-normal leading-normal"
+                  >
+                    By Alumnos IS501
+                  </p>
                 </footer>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-    </div>
-</body>
-    
-
- 
+  </body>
 </html>
