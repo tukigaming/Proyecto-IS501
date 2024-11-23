@@ -27,7 +27,7 @@ include 'conexion.php';
         font-size: 1.30rem; 
     }
     </style>
-    <title>Pacientes</title>
+    <title>Empleados</title>
 </head>
 <body>
     <div class="relative flex min-h-screen flex-col bg-slate-50">
@@ -52,8 +52,7 @@ include 'conexion.php';
 
 
         <nav class="flex gap-6">
-            
-            <a href="Empleado.php" class="font-semibold text-gray-700">Empleados</a>
+            <a href="Pacientes.php" class="font-semibold text-gray-700">Pacientes</a>
             <a href="#" class="font-semibold text-gray-700">Citas</a>
             <a href="#" class="font-semibold text-gray-700">Historial Médico</a>
             <a href="inicio.php" class="font-semibold text-gray-700">Inicio</a>
@@ -69,7 +68,7 @@ include 'conexion.php';
     </header>
     
     <main class="flex flex-col items-center justify-center px-10 py-10 w-full max-w-7xl mx-auto bg-gray-50">
-    <h2 class="text-6xl font-extrabold mb-9 text-center">PACIENTES</h2>
+    <h2 class="text-6xl font-extrabold mb-9 text-center">EMPLEADOS</h2>
     <form method="GET" class="mb-6 w-full max-w-5xl flex gap-6 justify-center">
         <!-- Aumentar el ancho del formulario -->
         <label class="relative flex w-3/4"> <!-- Expande el input -->
@@ -101,78 +100,95 @@ include 'conexion.php';
         <table class="min-w-full border-collapse">
             <thead class="bg-gray-100 border-b">
                 <tr>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Nombre Completo</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">ID Paciente</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Última Visita</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Nombre Completo</th>
+                    <th class="px-5 py-4 text-left text-base font-medium text-gray-600">ID Empleado</th>
+                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Contratacion</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Cargo</th>
+                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Inicio</th>
+                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Fin</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Actual cargo?</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
                     
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
-                $rows_per_page = intval($_GET['rows_per_page'] ?? 5);
-                $page = max(intval($_GET['page'] ?? 1), 1);
-                $offset = ($page - 1) * $rows_per_page;
-                
-                // Consulta para obtener las filas con paginación
-                $consulta = $conexion->query("
-                    SELECT 
-                        PACIENTE.ID AS Paciente_ID,
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) AS Nombre_Completo,
-                        MAX(Historial_Medico.Fecha) AS Ultima_Visita,
-                        TELEFONO.Numero AS Telefono
-                    FROM 
-                        PACIENTE
-                    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
-                    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
-                    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
-                    WHERE 
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
-                        OR TELEFONO.Numero LIKE '%$busqueda%'
-                        OR PACIENTE.ID LIKE '%$busqueda%'
-                    GROUP BY 
-                        PACIENTE.ID, Nombre_Completo, TELEFONO.Numero
-                    LIMIT $rows_per_page OFFSET $offset
-                ");
-                
-                // Consulta para contar el total de filas
-                $total_consulta = $conexion->query("
-                    SELECT COUNT(DISTINCT PACIENTE.ID) as total
-                    FROM 
-                        PACIENTE
-                    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
-                    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
-                    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
-                    WHERE 
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
-                        OR TELEFONO.Numero LIKE '%$busqueda%'
-                        OR PACIENTE.ID LIKE '%$busqueda%'
-                ");
-                
-                if ($total_consulta) {
-                    $total_rows = $total_consulta->fetch_assoc()['total'];
-                    $total_pages = ceil($total_rows / $rows_per_page);
-                } else {
-                    $total_rows = 0;
-                    $total_pages = 1; // Asignar al menos 1 página para evitar errores
-                }
-                
-                // Mostrar resultados
-                if ($consulta->num_rows > 0) {
-                    while ($row = $consulta->fetch_assoc()) {
-                        echo "<tr class='border-t bg-[#f9fafb]'> <!-- Cambia el color de fondo -->
-                            <td class='px-6 py-4'>{$row['Nombre_Completo']}</td>
-                            <td class='px-6 py-4'>{$row['Paciente_ID']}</td>
-                            <td class='px-6 py-4'>{$row['Ultima_Visita']}</td>
-                            <td class='px-6 py-4'>{$row['Telefono']}</td>
-                            
-                        </tr>";
-                    }
-                } else {
-                    echo "<tr class='bg-[#f9fafb]'><td colspan='5' class='px-6 py-4 text-center text-gray-500'>No se encontraron resultados</td></tr>";
-                }
-                ?>
+            <?php
+// Parámetros de búsqueda y paginación
+$busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
+$rows_per_page = intval($_GET['rows_per_page'] ?? 5);
+$page = max(intval($_GET['page'] ?? 1), 1);
+$offset = ($page - 1) * $rows_per_page;
+
+// Consulta para obtener datos con filtros y paginación
+$consulta = $conexion->query("
+    SELECT 
+        EMPLEADO.ID AS Empleado_ID,
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) AS Nombre_Completo,
+        CARGO.Nombre AS Cargo,
+        EMPLEADO_has_CARGO.Fecha_Inicio,
+        EMPLEADO_has_CARGO.Fecha_Fin,
+        EMPLEADO.Fecha_Contratacion,
+        CASE 
+            WHEN EMPLEADO_has_CARGO.Fecha_Fin IS NULL OR EMPLEADO_has_CARGO.Fecha_Fin > CURDATE() THEN 'Activo'
+            ELSE 'Inactivo'
+        END AS Estado_Cargo,
+        TELEFONO.Numero AS Telefono
+    FROM 
+        EMPLEADO
+    INNER JOIN PERSONA ON EMPLEADO.Persona_ID = PERSONA.ID
+    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
+    INNER JOIN EMPLEADO_has_CARGO ON EMPLEADO.ID = EMPLEADO_has_CARGO.EMPLEADO_ID
+    INNER JOIN CARGO ON EMPLEADO_has_CARGO.CARGO_ID = CARGO.ID
+    WHERE 
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
+        OR EMPLEADO.ID LIKE '%$busqueda%'
+        OR CARGO.Nombre LIKE '%$busqueda%'
+    LIMIT $rows_per_page OFFSET $offset
+");
+
+// Consulta para contar el total de resultados
+$total_consulta = $conexion->query("
+    SELECT COUNT(DISTINCT EMPLEADO.ID) as total
+    FROM 
+        EMPLEADO
+    INNER JOIN PERSONA ON EMPLEADO.Persona_ID = PERSONA.ID
+    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
+    INNER JOIN EMPLEADO_has_CARGO ON EMPLEADO.ID = EMPLEADO_has_CARGO.EMPLEADO_ID
+    INNER JOIN CARGO ON EMPLEADO_has_CARGO.CARGO_ID = CARGO.ID
+    WHERE 
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
+        OR EMPLEADO.ID LIKE '%$busqueda%'
+        OR CARGO.Nombre LIKE '%$busqueda%'
+");
+
+if ($total_consulta) {
+    $total_rows = $total_consulta->fetch_assoc()['total'];
+    $total_pages = ceil($total_rows / $rows_per_page);
+} else {
+    $total_rows = 0;
+    $total_pages = 1; // Al menos una página
+}
+
+// Mostrar resultados
+if ($consulta->num_rows > 0) {
+    while ($row = $consulta->fetch_assoc()) {
+        echo "<tr class='border-t bg-[#f9fafb]'>
+            <td class='px-15 py-4'>{$row['Nombre_Completo']}</td>
+            <td class='px-5 py-4'>{$row['Empleado_ID']}</td>
+            <td class='px-6 py-4'>{$row['Fecha_Contratacion']}</td>
+            <td class='px-6 py-4'>{$row['Cargo']}</td>
+            <td class='px-13 py-4'>{$row['Fecha_Inicio']}</td>
+            <td class='px-15 py-4'>{$row['Fecha_Fin']}</td>
+            <td class='px-10 py-4'>{$row['Estado_Cargo']}</td>
+            <td class='px-8 py-4'>{$row['Telefono']}</td>
+        </tr>";
+    }
+} else {
+    echo "<tr><td colspan='8' class='text-center'>No se encontraron resultados</td></tr>";
+}
+?>
+
+
             </tbody>
         </table>
     </div>
@@ -187,9 +203,9 @@ include 'conexion.php';
             <?php endfor; ?>
         </div>
 
-        <a href="EditarPaciente.php">
+        <a href="EditarEmpleado.php">
     <button type="button" class="px-10 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600">
-        Agregar Paciente
+        Agregar Empleado
     </button>
 </a>
 
@@ -202,4 +218,3 @@ include 'conexion.php';
  </div>
 </body>
 </html>
-
