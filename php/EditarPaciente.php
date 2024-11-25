@@ -1,161 +1,202 @@
+<?php
+include 'conexion.php';
+
+?>
+
+
+
+
 <html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+  />
+  <title>Pagina Editar Paciente</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+        body {
+            overflow-x: hidden;
+            font-family: 'Inter', 'Noto Sans', sans-serif;
+            background-color: #f5f5f5;
+        }
 
-    <title>Pagina Editar Paciente</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    header {
+        background-color: inherit; /* Hereda el color del body */
+    }
+    
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div
-      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
-      style="--radio-dot-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(17,23,23)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3ccircle cx=%278%27 cy=%278%27 r=%273%27/%3e%3c/svg%3e'); font-family: Manrope, &quot;Noto Sans&quot;, sans-serif;"
+    nav a {
+        font-size: 1.30rem; 
+    }
+    </style>
+    <title>Pacientes</title>
+</head>
+<body>
+    <div class="relative flex min-h-screen flex-col bg-slate-50">
+    <header class="flex items-center justify-between border-b px-20 py-5 shadow-md">
+
+    <div class="flex items-center gap-2"> 
+    <svg
+        viewBox="0 0 48 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-6 h-6" 
     >
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf3] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#0e141b]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <h2 class="text-[#0e141b] text-lg font-bold leading-tight tracking-[-0.015em]">MediCare</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="P_Pacientes.html">pacientes</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="p.empleados.html">Empleados</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="pagina_Cita.html">Citas</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="P.historialMedico.html">Historial Medico</a>
-              <a class="text-[#111717] text-sm font-custom text-black font-bold leading-normal" href="inicio.php">Inicio</a>
-            </div>
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
+            fill="currentColor"
+        ></path>
+    </svg>
+         <h1 class="text-3xl font-bold">MediCare</h1>
+        </div>
+
+
+        <nav class="flex gap-6">
             
+            <a href="Pacientes.php" class="font-semibold text-gray-700">Pacientes</a>
+            <a href="#" class="font-semibold text-gray-700">Citas</a>
+            <a href="#" class="font-semibold text-gray-700">Historial Médico</a>
+        
+            <a href="inicio.php" class="font-semibold text-gray-700">Inicio</a>
+
             <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://cdn.usegalileo.ai/stability/b8951bbb-4539-4798-bee6-7a9bc44b9ce9.png");'
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12"
+              style="
+                background-image: url('https://cdn.usegalileo.ai/stability/b8951bbb-4539-4798-bee6-7a9bc44b9ce9.png');
+              "
             ></div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight min-w-72">Editar Paciente</p></div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Completo</p>
-                <input
-                  placeholder="Oscar oliva"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
+        </nav>
+        
+    </header>
+    <div class="px-40 flex justify-center items-center py-10 bg-gray-100">
+    <div class="layout-content-container bg-gray-200 p-10 rounded-lg shadow-lg flex flex-col w-full max-w-[512px]">
+        <div class="flex flex-wrap justify-between gap-3 mb-6">
+            <p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight text-center w-full">
+                Editar Paciente
+            </p>
+        </div>
+
+        <!-- Formulario -->
+        <form method="POST" action="EditarPaciente.php">
+            <input type="hidden" name="PacienteID" />
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+                <label class="flex flex-col w-full">
+                    <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Completo</p>
+                    <input
+                        name="NombreCompleto"
+                        placeholder="Nombre Completo"
+                        class="form-input flex w-full resize-none rounded-xl border border-gray-400 bg-white focus:ring-2 focus:ring-blue-500 h-14 placeholder-gray-500 p-4 text-base"
+                    />
+                </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
               <label class="flex flex-col min-w-40 flex-1">
                 <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha De Nacimiento</p>
                 <input
-                  placeholder="01/01/1990"
+                  name="FechaNacimiento"
+                  type="text"
+                  placeholder="año-mes-dia"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
+                  
                 />
               </label>
             </div>
-            <div class="flex flex-col gap-3 p-4">
-              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
-                <input
-                  type="radio"
-                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
-                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
-                  checked=""
-                />
-                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Hombre</p></div>
+
+            <div class="flex max-w-full flex-wrap items-end gap-6 mb-7">
+              <p class="text-[#111717] text-base font-medium leading-normal pb-0.3">Sexo</p>
+              <label>
+                <input type="radio" name="sexo" value="H" />
+                Hombre
               </label>
-              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
-                <input
-                  type="radio"
-                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
-                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
-                />
-                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Mujer</p></div>
+              <label>
+                <input type="radio" name="sexo" value="M" />
+                Mujer
               </label>
-              <label class="flex items-center gap-4 rounded-xl border border-solid border-[#dce5e4] p-[15px]">
-                <input
-                  type="radio"
-                  class="h-5 w-5 border-2 border-[#dce5e4] bg-transparent text-transparent checked:border-[#111717] checked:bg-[image:--radio-dot-svg] focus:outline-none focus:ring-0 focus:ring-offset-0 checked:focus:border-[#111717]"
-                  name="e693afbc-70e6-49e6-bab1-1ae298f2f308"
-                />
-                
-                <div class="flex grow flex-col"><p class="text-[#111717] text-sm font-medium leading-normal">Pref. No Decir</p></div>
+              <label>
+                <input type="radio" name="sexo" value="O" />
+                Pref. No Decir
               </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+
+        
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
               <label class="flex flex-col min-w-40 flex-1">
                 <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. Identidad</p>
                 <input
-                  placeholder="e.g. (555) 555-5555"
+                  name="Identidad"
+                  placeholder="xxxx-xxxx-xxxxx"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
+                  
                 />
               </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. RTN</p>
+                <input
+                  name="RTN"
+                  placeholder="xxxx-xxxx-xxxxxx"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                 
+                />
+              </label>
+            </div>
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
               <label class="flex flex-col min-w-40 flex-1">
                 <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Telefono</p>
                 <input
-                  placeholder="e.g. (555) 555-5555"
+                  name="NumeroTelefono"
+                  placeholder="xxxx-xxxx"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
+                 
                 />
               </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Correo </p>
-                <input
-                  placeholder="e.g. janedoe@example.com"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+                <label class="flex flex-col w-full">
+                    <p class="text-[#111717] text-base font-medium leading-normal pb-2">Correo</p>
+                    <input
+                        name="correo"
+                        type="email"
+                        placeholder="ejemplo@correo.com"
+                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                    />
+                </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Poliza</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Direccion</p>
                 <textarea
-                  placeholder="Ninguna"
+                  name="Direccion"
+                  placeholder="Direccion exacta"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                 ></textarea>
               </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Emergencia</p>
-                <input
-                  placeholder="xxxxxxxxxxxxxxx"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
+
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    class="w-full max-w-sm rounded-xl bg-blue-600 text-white font-bold py-3 px-6 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300"
+                >
+                    Guardar
+                </button>
             </div>
-            <div class="flex px-4 py-3">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 flex-1 bg-[#13ecd6] text-[#111817] text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Guardar</span>
-              </button>
-            </div>
-            <div class="px-40 flex flex-1 justify-center py-5">
+        </form>
+    </div>
+</div>
+<div class="px-40 flex flex-1 justify-center py-5">
               <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                 <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
                   <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
@@ -185,9 +226,55 @@
                 </footer>
               </div>
           </div>
-        </div>
-      </div>
-    </div>
-    
-  </body>
+</body>
 </html>
+
+<?php
+// Verificar si se ha enviado el formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recoger los datos enviados desde el formulario
+    $NombreCompleto = $_POST['NombreCompleto']; // Campo que contiene el nombre completo
+    $Direccion = $_POST['Direccion'];
+    $correo = $_POST['correo'];
+    $sexo = $_POST['sexo'];
+    $Identidad = $_POST['Identidad'];
+    $RTN = $_POST['RTN'];
+    $NumeroTelefono = $_POST['NumeroTelefono'];
+    $FechaNaci = $_POST['FechaNacimiento'];
+
+    // Dividir el nombre completo en partes
+    $nombrePartes = explode(' ', $NombreCompleto);
+    $PNombre = $nombrePartes[0] ?? ''; // Primer nombre
+    $SNombre = $nombrePartes[1] ?? ''; // Segundo nombre
+    $PApellido = $nombrePartes[2] ?? ''; // Primer apellido
+    $SApellido = $nombrePartes[3] ?? ''; // Segundo apellido
+
+    // Insertar en la tabla TELEFONO
+    $sqlTelefono = "INSERT INTO TELEFONO (Numero) VALUES ('$NumeroTelefono')";
+    if (mysqli_query($conexion, $sqlTelefono)) {
+        // Obtener el ID generado en TELEFONO
+        $telefonoId = mysqli_insert_id($conexion);
+
+        // Insertar en la tabla PERSONA
+        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, TELEFONO_ID, Fecha_Nacimiento)
+                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$telefonoId', '$FechaNaci')";
+
+        if (mysqli_query($conexion, $sqlPersona)) {
+            // Obtener el ID generado en PERSONA
+            $personaId = mysqli_insert_id($conexion);
+
+            // Insertar en la tabla PACIENTE
+            $sqlPaciente = "INSERT INTO PACIENTE (PERSONA_ID) VALUES ('$personaId')";
+            if (mysqli_query($conexion, $sqlPaciente)) {
+                echo "Datos insertados correctamente en las tablas PERSONA, TELEFONO y PACIENTE.";
+            } else {
+                echo "Error al insertar en la tabla PACIENTE: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error al insertar en la tabla PERSONA: " . mysqli_error($conexion);
+        }
+    } else {
+        echo "Error al insertar en la tabla TELEFONO: " . mysqli_error($conexion);
+    }
+}
+?>

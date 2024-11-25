@@ -56,7 +56,7 @@
 
 
     <nav class="flex gap-6">
-        
+        <a href="Pacientes.php" class="font-semibold text-gray-700">Pacientes</a>  
         <a href="Empleado.php" class="font-semibold text-gray-700">Empleados</a>
         <a href="#" class="font-semibold text-gray-700">Citas</a>
         <a href="#" class="font-semibold text-gray-700">Historial Médico</a>
