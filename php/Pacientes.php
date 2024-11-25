@@ -104,75 +104,75 @@ include 'conexion.php';
                     <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Nombre Completo</th>
                     <th class="px-6 py-4 text-left text-base font-medium text-gray-600">ID Paciente</th>
                     <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Última Visita</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
                     
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
-                $rows_per_page = intval($_GET['rows_per_page'] ?? 5);
-                $page = max(intval($_GET['page'] ?? 1), 1);
-                $offset = ($page - 1) * $rows_per_page;
-                
-                // Consulta para obtener las filas con paginación
-                $consulta = $conexion->query("
-                    SELECT 
-                        PACIENTE.ID AS Paciente_ID,
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) AS Nombre_Completo,
-                        MAX(Historial_Medico.Fecha) AS Ultima_Visita,
-                        TELEFONO.Numero AS Telefono
-                    FROM 
-                        PACIENTE
-                    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
-                    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
-                    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
-                    WHERE 
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
-                        OR TELEFONO.Numero LIKE '%$busqueda%'
-                        OR PACIENTE.ID LIKE '%$busqueda%'
-                    GROUP BY 
-                        PACIENTE.ID, Nombre_Completo, TELEFONO.Numero
-                    LIMIT $rows_per_page OFFSET $offset
-                ");
-                
-                // Consulta para contar el total de filas
-                $total_consulta = $conexion->query("
-                    SELECT COUNT(DISTINCT PACIENTE.ID) as total
-                    FROM 
-                        PACIENTE
-                    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
-                    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
-                    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
-                    WHERE 
-                        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
-                        OR TELEFONO.Numero LIKE '%$busqueda%'
-                        OR PACIENTE.ID LIKE '%$busqueda%'
-                ");
-                
-                if ($total_consulta) {
-                    $total_rows = $total_consulta->fetch_assoc()['total'];
-                    $total_pages = ceil($total_rows / $rows_per_page);
-                } else {
-                    $total_rows = 0;
-                    $total_pages = 1; // Asignar al menos 1 página para evitar errores
-                }
-                
-                // Mostrar resultados
-                if ($consulta->num_rows > 0) {
-                    while ($row = $consulta->fetch_assoc()) {
-                        echo "<tr class='border-t bg-[#f9fafb]'> <!-- Cambia el color de fondo -->
-                            <td class='px-6 py-4'>{$row['Nombre_Completo']}</td>
-                            <td class='px-6 py-4'>{$row['Paciente_ID']}</td>
-                            <td class='px-6 py-4'>{$row['Ultima_Visita']}</td>
-                            <td class='px-6 py-4'>{$row['Telefono']}</td>
-                            
-                        </tr>";
-                    }
-                } else {
-                    echo "<tr class='bg-[#f9fafb]'><td colspan='5' class='px-6 py-4 text-center text-gray-500'>No se encontraron resultados</td></tr>";
-                }
-                ?>
+            <?php
+$busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
+$rows_per_page = intval($_GET['rows_per_page'] ?? 5);
+$page = max(intval($_GET['page'] ?? 1), 1);
+$offset = ($page - 1) * $rows_per_page;
+
+
+$consulta = $conexion->query("
+    SELECT 
+        PACIENTE.ID AS Paciente_ID,
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) AS Nombre_Completo,
+        MAX(Historial_Medico.Fecha) AS Ultima_Visita,
+        GROUP_CONCAT(TELEFONO.Numero SEPARATOR ' , ') AS Telefonos
+    FROM 
+        PACIENTE
+    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
+    LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
+    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
+    WHERE 
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
+        OR TELEFONO.Numero LIKE '%$busqueda%'
+        OR PACIENTE.ID LIKE '%$busqueda%'
+    GROUP BY 
+        PACIENTE.ID, Nombre_Completo
+    LIMIT $rows_per_page OFFSET $offset
+");
+
+// Consulta para contar el total de filas
+$total_consulta = $conexion->query("
+    SELECT COUNT(DISTINCT PACIENTE.ID) as total
+    FROM 
+        PACIENTE
+    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
+    LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
+    WHERE 
+        CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
+        OR TELEFONO.Numero LIKE '%$busqueda%'
+        OR PACIENTE.ID LIKE '%$busqueda%'
+");
+
+if ($total_consulta) {
+    $total_rows = $total_consulta->fetch_assoc()['total'];
+    $total_pages = ceil($total_rows / $rows_per_page);
+} else {
+    $total_rows = 0;
+    $total_pages = 1; // Asignar al menos 1 página para evitar errores
+}
+
+// Mostrar resultados
+if ($consulta->num_rows > 0) {
+    while ($row = $consulta->fetch_assoc()) {
+        echo "<tr class='border-t bg-[#f9fafb]'> <!-- Cambia el color de fondo -->
+            <td class='px-6 py-4'>{$row['Nombre_Completo']}</td>
+            <td class='px-6 py-4'>{$row['Paciente_ID']}</td>
+            <td class='px-6 py-4'>{$row['Ultima_Visita']}</td>
+            <td class='px-6 py-4'>{$row['Telefonos']}</td>
+        </tr>";
+    }
+} else {
+    echo "<tr class='bg-[#f9fafb]'><td colspan='4' class='px-6 py-4 text-center text-gray-500'>No se encontraron resultados</td></tr>";
+}
+?>
+
+
             </tbody>
         </table>
     </div>

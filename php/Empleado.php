@@ -113,13 +113,12 @@ include 'conexion.php';
             </thead>
             <tbody>
             <?php
-// Parámetros de búsqueda y paginación
 $busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
 $rows_per_page = intval($_GET['rows_per_page'] ?? 5);
 $page = max(intval($_GET['page'] ?? 1), 1);
 $offset = ($page - 1) * $rows_per_page;
 
-// Consulta para obtener datos con filtros y paginación
+// Consulta para obtener los datos con los teléfonos agrupados
 $consulta = $conexion->query("
     SELECT 
         EMPLEADO.ID AS Empleado_ID,
@@ -132,17 +131,19 @@ $consulta = $conexion->query("
             WHEN EMPLEADO_has_CARGO.Fecha_Fin IS NULL OR EMPLEADO_has_CARGO.Fecha_Fin > CURDATE() THEN 'Activo'
             ELSE 'Inactivo'
         END AS Estado_Cargo,
-        TELEFONO.Numero AS Telefono
+        GROUP_CONCAT(TELEFONO.Numero SEPARATOR ' , ') AS Telefonos
     FROM 
         EMPLEADO
     INNER JOIN PERSONA ON EMPLEADO.Persona_ID = PERSONA.ID
-    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
+    LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
     INNER JOIN EMPLEADO_has_CARGO ON EMPLEADO.ID = EMPLEADO_has_CARGO.EMPLEADO_ID
     INNER JOIN CARGO ON EMPLEADO_has_CARGO.CARGO_ID = CARGO.ID
     WHERE 
         CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
         OR EMPLEADO.ID LIKE '%$busqueda%'
         OR CARGO.Nombre LIKE '%$busqueda%'
+    GROUP BY 
+        EMPLEADO.ID, Nombre_Completo, Cargo, Fecha_Inicio, Fecha_Fin, Fecha_Contratacion, Estado_Cargo
     LIMIT $rows_per_page OFFSET $offset
 ");
 
@@ -152,7 +153,7 @@ $total_consulta = $conexion->query("
     FROM 
         EMPLEADO
     INNER JOIN PERSONA ON EMPLEADO.Persona_ID = PERSONA.ID
-    INNER JOIN TELEFONO ON PERSONA.TELEFONO_ID = TELEFONO.ID
+    LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
     INNER JOIN EMPLEADO_has_CARGO ON EMPLEADO.ID = EMPLEADO_has_CARGO.EMPLEADO_ID
     INNER JOIN CARGO ON EMPLEADO_has_CARGO.CARGO_ID = CARGO.ID
     WHERE 
@@ -180,13 +181,14 @@ if ($consulta->num_rows > 0) {
             <td class='px-13 py-4'>{$row['Fecha_Inicio']}</td>
             <td class='px-15 py-4'>{$row['Fecha_Fin']}</td>
             <td class='px-10 py-4'>{$row['Estado_Cargo']}</td>
-            <td class='px-8 py-4'>{$row['Telefono']}</td>
+            <td class='px-8 py-4'>{$row['Telefonos']}</td>
         </tr>";
     }
 } else {
     echo "<tr><td colspan='8' class='text-center'>No se encontraron resultados</td></tr>";
 }
 ?>
+
 
 
             </tbody>
