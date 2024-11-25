@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$DB = "expediente_medico_bd";
+$DB = "base_py_bd1";
 
 $conexion = new mysqli($server, $user, $pass, $DB) ;
 
