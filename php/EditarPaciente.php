@@ -32,6 +32,14 @@ include 'conexion.php';
     nav a {
         font-size: 1.30rem; 
     }
+
+    .formulario{
+      width: 100%; /* Asegura que el formulario ocupe el 100% del espacio disponible */
+     
+    flex-wrap: wrap; /* Permite que los elementos se ajusten a la siguiente línea si no caben */
+    
+    box-sizing: border-box;
+    }
     </style>
     <title>Pacientes</title>
 </head>
@@ -78,12 +86,12 @@ include 'conexion.php';
     <div class="layout-content-container bg-gray-200 p-10 rounded-lg shadow-lg flex flex-col w-full max-w-[512px]">
         <div class="flex flex-wrap justify-between gap-3 mb-6">
             <p class="text-[#0e141b] tracking-light text-[52px] font-extrabold leading-tight text-center w-full">
-                Editar Paciente
+                Registrar Paciente
             </p>
         </div>
 
         <!-- Formulario -->
-        <form method="POST" action="EditarPaciente.php">
+        <form method="POST" action="EditarPaciente.php" class="formulario"">
             <input type="hidden" name="PacienteID" />
             <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
                 <label class="flex flex-col w-full">
@@ -185,6 +193,18 @@ include 'conexion.php';
               </label>
             </div>
 
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Emergencia</p>
+                <input
+                  placeholder="xxxx-xxxx"
+                  name = "Emergencia"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+
             <div class="flex justify-center">
                 <button
                     type="submit"
@@ -241,6 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $RTN = $_POST['RTN'];
     $NumeroTelefono = $_POST['NumeroTelefono'];
     $FechaNaci = $_POST['FechaNacimiento'];
+    $Num_emergencia = $_POST['Emergencia']; 
 
     // Dividir el nombre completo en partes
     $nombrePartes = explode(' ', $NombreCompleto);
@@ -250,8 +271,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $SApellido = $nombrePartes[3] ?? ''; // Segundo apellido
 
         // Insertar en la tabla PERSONA
-        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim)
-                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci')";
+        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim, Numero_Emergencia)
+                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci', '$Num_emergencia')";
 
         if (mysqli_query($conexion, $sqlPersona)) {
             // Obtener el ID generado en PERSONA

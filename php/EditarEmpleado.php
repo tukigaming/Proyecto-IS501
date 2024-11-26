@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
 
-    <title>Pagina Editar Paciente</title>
+    <title>Pagina registrar Empleado</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -27,8 +27,16 @@
     nav a {
         font-size: 1.30rem; 
     }
+
+    .formulario{
+      width: 100%; /* Asegura que el formulario ocupe el 100% del espacio disponible */
+     
+    flex-wrap: wrap; /* Permite que los elementos se ajusten a la siguiente línea si no caben */
+    
+    box-sizing: border-box;
+    }
     </style>
-    <title>Pacientes</title>
+    
 </head>
 <body>
     <div class="relative flex min-h-screen flex-col bg-slate-50">
@@ -74,12 +82,12 @@
       <div class="layout-content-container bg-gray-200 p-10 rounded-lg shadow-lg flex flex-col w-full max-w-[512px]">
         <div class="flex flex-wrap justify-between gap-3 mb-6">
             <p class="text-[#0e141b] tracking-light text-[48px] font-extrabold leading-tight text-center w-full">
-                Editar Empleados
+                Registrar Empleados
             </p>
         </div>
 
         <!-- Formulario -->
-        <form method="POST" action="">
+        <form method="POST" action="" class="formulario">
             <input type="hidden" name="EmpleadoID" />
             <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
                 <label class="flex flex-col w-full">
@@ -186,12 +194,29 @@
               <label class="flex flex-col min-w-40 flex-1">
                 <p class="text-[#111717] text-base font-medium leading-normal pb-2">Num. De Emergencia</p>
                 <input
-                  placeholder="xxxxxxxxxxxxxxx"
+                  placeholder="xxxx-xxxx"
+                  name = "Emergencia"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   value=""
                 />
               </label>
             </div>
+
+
+            <div class="flex max-w-full flex-wrap items-end gap-6 mb-6">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha De Contratacion</p>
+                <input
+                  name="FechaContrata"
+                  type="text"
+                  placeholder="año-mes-dia"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  
+                />
+              </label>
+            </div>
+
+
             <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
             <label  class="text-[#111717] text-base font-medium leading-normal pb-2">&nbsp&nbsp&nbsp&nbspCargo &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp</label>
             <select name="cargo" class="form-select" aria-label="Default select example">
@@ -224,7 +249,7 @@ while ($resultado = $sql->fetch_assoc()) {
               </label>
             </div>
 
-            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-8">
               <label class="flex flex-col min-w-40 flex-1">
                 <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha fin de cargo</p>
                 <input
@@ -238,7 +263,7 @@ while ($resultado = $sql->fetch_assoc()) {
             </div>
 
 
-              <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+              <div class="flex max-w-full flex-wrap items-end gap-4 mb-12">
             <label  class="text-[#111717] text-base font-medium leading-normal pb-2">Especialidad</label>
             <select name="Especialidad" class="form-select" aria-label="Default select example">
         <option selected disabled>--Seleccionar Especialidad--</option>
@@ -257,20 +282,57 @@ while ($resultado = $sql->fetch_assoc()) {
       </select>
             </div>
 
-            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+            <div class="flex max-w-full flex-wrap items-end gap-1 mb-3">
+            <label  class="text-[#111717] text-base font-medium leading-normal pb-0.3">Area Trabajo</label>
+            <select name="Area" class="form-select" aria-label="Default select example">
+        <option selected disabled>--Seleccionar Area_Trabajo--</option>
+        <?php
+include("conexion.php");
+
+// Consulta para obtener las pólizas
+$sql = $conexion->query("SELECT * FROM Area_Trabajo");
+
+// Generar las opciones del select
+while ($resultado = $sql->fetch_assoc()) {
+    echo "<option value='" . $resultado['ID'] . "'>" . $resultado['Descripcion'] . "</option>";
+}
+?>
+
+      </select>
+            </div>
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-3">
               <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha De Contratacion</p>
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha y Hora Inicio Area</p>
                 <input
-                  name="FechaContrata"
+                  name="Fechaarea"
                   type="text"
-                  placeholder="año-mes-dia"
+                  placeholder="año-mes-dia xx:xx:xx"
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   
                 />
               </label>
             </div>
 
-            <div class="flex max-w-full flex-wrap items-end gap-6 mb-7">
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-10">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha y Hora Fin Area</p>
+                <input
+                  name="Fechaarea2"
+                  type="text"
+                  placeholder="año-mes-dia xx:xx:xx"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  
+                />
+              </label>
+            </div>
+
+
+          
+
+            
+
+            <div class="flex max-w-full flex-wrap items-end gap-6 mb-10">
               <p class="text-[#111717] text-base font-medium leading-normal pb-0.3">¿es Gerente?</p>
               <label>
                 <input type="radio" name="Gerente" value="" />
@@ -348,7 +410,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $FehaContrata = $_POST['FechaContrata'];
     $FechaInicio = $_POST['FechaInicio']; 
     $Fechafin = $_POST['Fechafin']; 
-    $Gerente = $_POST['Gerente']; 
+    $Gerente = $_POST['Gerente'];
+    $Num_emergencia = $_POST['Emergencia']; 
+    $Area = $_POST['Area'];
+    $FechaHoraArea = $_POST['Fechaarea'];
+    $FechaHoraArea2 = $_POST['Fechaarea2'];
 
     // Dividir el nombre completo en partes
     $nombrePartes = explode(' ', $NombreCompleto);
@@ -358,8 +424,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $SApellido = $nombrePartes[3] ?? '';
 
     
-    $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim)
-                   VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci')";
+    $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim, Numero_Emergencia)
+                   VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci', '$Num_emergencia')";
     if (mysqli_query($conexion, $sqlPersona)) {
         // Obtener el ID generado en PERSONA
         $personaId = mysqli_insert_id($conexion);
@@ -380,6 +446,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sqlEmpleadoCargo = "INSERT INTO EMPLEADO_has_CARGO (EMPLEADO_ID, CARGO_ID, Fecha_Inicio, Fecha_Fin) 
                                  VALUES ('$empleadoId', '$Cargo', '$FechaInicio', '$Fechafin')";
             if (!mysqli_query($conexion, $sqlEmpleadoCargo)) {
+                echo "Error al insertar en EMPLEADO_has_CARGO: " . mysqli_error($conexion);
+            }
+
+            $sqlEmpleadoArea = "INSERT INTO empleado_has_area_trabajo (EMPLEADO_ID, Area_Trabajo_ID, Fecha_Hora_Asignacion, Fecha_Hora_Fin) 
+                                 VALUES ('$empleadoId', '$Area', '$FechaHoraArea', '$FechaHoraArea2')";
+            if (!mysqli_query($conexion, $sqlEmpleadoArea)) {
                 echo "Error al insertar en EMPLEADO_has_CARGO: " . mysqli_error($conexion);
             }
 
