@@ -96,18 +96,19 @@ include 'conexion.php';
         </label>
     </form>
 
-    <div class="bg-white shadow-lg overflow-hidden rounded-lg w-full max-w-6xl">
+    <div class="bg-white shadow-lg overflow-hidden rounded-lg w-full max-w-9xl">
         <table class="min-w-full border-collapse">
             <thead class="bg-gray-100 border-b">
                 <tr>
-                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Nombre Completo</th>
-                    <th class="px-5 py-4 text-left text-base font-medium text-gray-600">ID Empleado</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Contratacion</th>
-                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Cargo</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Inicio</th>
-                    <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Fecha Fin</th>
-                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Actual cargo?</th>
-                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Nombre Completo</th>
+                <th class="px-6 py-4 text-left text-base font-medium text-gray-600">ID Empleado</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Fecha Contratación</th>
+                <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Cargo</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Fecha Inicio</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Fecha Fin</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Actual cargo?</th>
+                <th class="px-8 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
+                <th class="px-5 py-4 text-left text-base font-medium text-gray-600">Acción</th>
                     
                 </tr>
             </thead>
@@ -175,13 +176,19 @@ if ($consulta->num_rows > 0) {
     while ($row = $consulta->fetch_assoc()) {
         echo "<tr class='border-t bg-[#f9fafb]'>
             <td class='px-15 py-4'>{$row['Nombre_Completo']}</td>
-            <td class='px-5 py-4'>{$row['Empleado_ID']}</td>
+            <td class='px-10 py-4'>{$row['Empleado_ID']}</td>
             <td class='px-6 py-4'>{$row['Fecha_Contratacion']}</td>
             <td class='px-6 py-4'>{$row['Cargo']}</td>
-            <td class='px-13 py-4'>{$row['Fecha_Inicio']}</td>
-            <td class='px-15 py-4'>{$row['Fecha_Fin']}</td>
+            <td class='px-12.5 py-3'>{$row['Fecha_Inicio']}</td>
+            <td class='px-13 py-4'>{$row['Fecha_Fin']}</td>
             <td class='px-10 py-4'>{$row['Estado_Cargo']}</td>
             <td class='px-8 py-4'>{$row['Telefonos']}</td>
+             <td class='px-4 py-4'>
+                <a href='' 
+                   class='text-blue-500 hover:underline'>
+                    Modificar
+                </a>
+            </td>
         </tr>";
     }
 } else {

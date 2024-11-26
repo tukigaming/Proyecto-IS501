@@ -97,7 +97,7 @@ include 'conexion.php';
         </label>
     </form>
 
-    <div class="bg-white shadow-lg overflow-hidden rounded-lg w-full max-w-6xl">
+    <div class="bg-white shadow-lg overflow-hidden rounded-lg w-full max-w-8xl">
         <table class="min-w-full border-collapse">
             <thead class="bg-gray-100 border-b">
                 <tr>
@@ -105,36 +105,37 @@ include 'conexion.php';
                     <th class="px-6 py-4 text-left text-base font-medium text-gray-600">ID Paciente</th>
                     <th class="px-6 py-4 text-left text-base font-medium text-gray-600">Última Visita</th>
                     <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Teléfono</th>
+                    <th class="px-10 py-4 text-left text-base font-medium text-gray-600">Accion</th>
                     
                 </tr>
             </thead>
             <tbody>
             <?php
-$busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
-$rows_per_page = intval($_GET['rows_per_page'] ?? 5);
-$page = max(intval($_GET['page'] ?? 1), 1);
-$offset = ($page - 1) * $rows_per_page;
+            $busqueda = $conexion->real_escape_string($_GET['search'] ?? '');
+            $rows_per_page = intval($_GET['rows_per_page'] ?? 5);
+            $page = max(intval($_GET['page'] ?? 1), 1);
+            $offset = ($page - 1) * $rows_per_page;
 
 
-$consulta = $conexion->query("
-    SELECT 
+        $consulta = $conexion->query("
+        SELECT 
         PACIENTE.ID AS Paciente_ID,
         CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) AS Nombre_Completo,
         MAX(Historial_Medico.Fecha) AS Ultima_Visita,
         GROUP_CONCAT(TELEFONO.Numero SEPARATOR ' , ') AS Telefonos
-    FROM 
+        FROM 
         PACIENTE
-    INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
-    LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
-    LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
-    WHERE 
+        INNER JOIN PERSONA ON PACIENTE.PERSONA_ID = PERSONA.ID
+        LEFT JOIN TELEFONO ON PERSONA.ID = TELEFONO.Persona_ID
+        LEFT JOIN Historial_Medico ON PACIENTE.ID = Historial_Medico.Paciente_ID
+        WHERE 
         CONCAT(PERSONA.PNombre, ' ', PERSONA.SNombre, ' ', PERSONA.PApellido, ' ', PERSONA.SApellido) LIKE '%$busqueda%'
         OR TELEFONO.Numero LIKE '%$busqueda%'
         OR PACIENTE.ID LIKE '%$busqueda%'
-    GROUP BY 
+        GROUP BY 
         PACIENTE.ID, Nombre_Completo
-    LIMIT $rows_per_page OFFSET $offset
-");
+        LIMIT $rows_per_page OFFSET $offset
+        ");
 
 // Consulta para contar el total de filas
 $total_consulta = $conexion->query("
@@ -165,6 +166,13 @@ if ($consulta->num_rows > 0) {
             <td class='px-6 py-4'>{$row['Paciente_ID']}</td>
             <td class='px-6 py-4'>{$row['Ultima_Visita']}</td>
             <td class='px-6 py-4'>{$row['Telefonos']}</td>
+        <td class='px-10 py-4'>
+                <a href='' 
+                   class='text-blue-500 hover:underline'>
+                    Modificar
+                </a>
+            </td>
+
         </tr>";
     }
 } else {
