@@ -249,19 +249,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $PApellido = $nombrePartes[2] ?? ''; // Primer apellido
     $SApellido = $nombrePartes[3] ?? ''; // Segundo apellido
 
-    // Insertar en la tabla TELEFONO
-    $sqlTelefono = "INSERT INTO TELEFONO (Numero) VALUES ('$NumeroTelefono')";
-    if (mysqli_query($conexion, $sqlTelefono)) {
-        // Obtener el ID generado en TELEFONO
-        $telefonoId = mysqli_insert_id($conexion);
-
         // Insertar en la tabla PERSONA
-        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, TELEFONO_ID, Fecha_Nacimiento)
-                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$telefonoId', '$FechaNaci')";
+        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim)
+                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci')";
 
         if (mysqli_query($conexion, $sqlPersona)) {
             // Obtener el ID generado en PERSONA
             $personaId = mysqli_insert_id($conexion);
+
+            
+    // Insertar en la tabla TELEFONO
+    $sqlTelefono = "INSERT INTO TELEFONO (Numero, PERSONA_ID) VALUES ('$NumeroTelefono', '$personaId')";
+    if (mysqli_query($conexion, $sqlTelefono)) {
+        // Obtener el ID generado en TELEFONO
+        $telefonoId = mysqli_insert_id($conexion);
+
 
             // Insertar en la tabla PACIENTE
             $sqlPaciente = "INSERT INTO PACIENTE (PERSONA_ID) VALUES ('$personaId')";

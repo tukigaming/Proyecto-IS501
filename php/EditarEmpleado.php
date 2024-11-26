@@ -79,8 +79,8 @@
         </div>
 
         <!-- Formulario -->
-        <form method="POST" action="EditarPaciente.php">
-            <input type="hidden" name="PacienteID" />
+        <form method="POST" action="">
+            <input type="hidden" name="EmpleadoID" />
             <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
                 <label class="flex flex-col w-full">
                     <p class="text-[#111717] text-base font-medium leading-normal pb-2">Nombre Completo</p>
@@ -204,13 +204,38 @@ $sql = $conexion->query("SELECT * FROM cargo");
 
 // Generar las opciones del select
 while ($resultado = $sql->fetch_assoc()) {
-    echo "<option value='" . $resultado['id'] . "'>" . $resultado['Nombre'] . "</option>";
+    echo "<option value='" . $resultado['ID'] . "'>" . $resultado['Nombre'] . "</option>";
 }
 ?>
 
       </select>
             </div>
 
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha Inicio de cargo</p>
+                <input
+                  name="FechaInicio"
+                  type="text"
+                  placeholder="año-mes-dia"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  
+                />
+              </label>
+            </div>
+
+            <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
+              <label class="flex flex-col min-w-40 flex-1">
+                <p class="text-[#111717] text-base font-medium leading-normal pb-2">Fecha fin de cargo</p>
+                <input
+                  name="Fechafin"
+                  type="text"
+                  placeholder="año-mes-dia"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
+                  
+                />
+              </label>
+            </div>
 
 
               <div class="flex max-w-full flex-wrap items-end gap-4 mb-4">
@@ -225,7 +250,7 @@ $sql = $conexion->query("SELECT * FROM Especialidad");
 
 // Generar las opciones del select
 while ($resultado = $sql->fetch_assoc()) {
-    echo "<option value='" . $resultado['id'] . "'>" . $resultado['Descripcion'] . "</option>";
+    echo "<option value='" . $resultado['ID'] . "'>" . $resultado['Descripcion'] . "</option>";
 }
 ?>
 
@@ -242,6 +267,18 @@ while ($resultado = $sql->fetch_assoc()) {
                   class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111717] focus:outline-0 focus:ring-0 border border-black bg-white focus:border-black h-14 placeholder:text-[#648783] p-[15px] text-base font-normal leading-normal"
                   
                 />
+              </label>
+            </div>
+
+            <div class="flex max-w-full flex-wrap items-end gap-6 mb-7">
+              <p class="text-[#111717] text-base font-medium leading-normal pb-0.3">¿es Gerente?</p>
+              <label>
+                <input type="radio" name="Gerente" value="" />
+                Si
+              </label>
+              <label>
+                <input type="radio" name="Gerente" value="1" />
+                No
               </label>
             </div>
 
@@ -292,10 +329,13 @@ while ($resultado = $sql->fetch_assoc()) {
 </html>
 
 <?php
+
+
+
 // Verificar si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recoger los datos enviados desde el formulario
-    $NombreCompleto = $_POST['NombreCompleto']; // Campo que contiene el nombre completo
+    $NombreCompleto = $_POST['NombreCompleto'];
     $Direccion = $_POST['Direccion'];
     $correo = $_POST['correo'];
     $sexo = $_POST['sexo'];
@@ -303,61 +343,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $RTN = $_POST['RTN'];
     $NumeroTelefono = $_POST['NumeroTelefono'];
     $FechaNaci = $_POST['FechaNacimiento'];
-    $Cargo = $_POST['cargo'];
-    $Especi = $_POST['Especialidad'];
+    $Cargo = $_POST['cargo']; // ID del cargo seleccionado
+    $Especi = $_POST['Especialidad'] ?? null; // ID de la especialidad seleccionada
     $FehaContrata = $_POST['FechaContrata'];
+    $FechaInicio = $_POST['FechaInicio']; 
+    $Fechafin = $_POST['Fechafin']; 
+    $Gerente = $_POST['Gerente']; 
 
     // Dividir el nombre completo en partes
     $nombrePartes = explode(' ', $NombreCompleto);
-    $PNombre = $nombrePartes[0] ?? ''; // Primer nombre
-    $SNombre = $nombrePartes[1] ?? ''; // Segundo nombre
-    $PApellido = $nombrePartes[2] ?? ''; // Primer apellido
-    $SApellido = $nombrePartes[3] ?? ''; // Segundo apellido
+    $PNombre = $nombrePartes[0] ?? '';
+    $SNombre = $nombrePartes[1] ?? '';
+    $PApellido = $nombrePartes[2] ?? '';
+    $SApellido = $nombrePartes[3] ?? '';
 
-    // Insertar en la tabla TELEFONO
-    $sqlTelefono = "INSERT INTO TELEFONO (Numero) VALUES ('$NumeroTelefono')";
-    if (mysqli_query($conexion, $sqlTelefono)) {
-        // Obtener el ID generado en TELEFONO
-        $telefonoId = mysqli_insert_id($conexion);
+    
+    $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, Fecha_Nacim)
+                   VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$FechaNaci')";
+    if (mysqli_query($conexion, $sqlPersona)) {
+        // Obtener el ID generado en PERSONA
+        $personaId = mysqli_insert_id($conexion);
 
+   
+        $sqlTelefono = "INSERT INTO TELEFONO (Numero, Persona_ID) VALUES ('$NumeroTelefono', '$personaId')";
+        if (!mysqli_query($conexion, $sqlTelefono)) {
+            echo "Error al insertar en TELEFONO: " . mysqli_error($conexion);
+        }
 
-        // Insertar en empleado_has_cargo
-        $sqlEmpleado_Cargo = "INSERT INTO empleado_has_cargo (EMPLEADO_ID, CARGO_ID) VALUES ('$NumeroTelefono')";
-        if (mysqli_query($conexion, $sqlEmpleado_Cargo)) {
-            
+    
+        $sqlEmpleado = "INSERT INTO EMPLEADO (Fecha_Contratacion, PERSONA_ID, Gerente_ID) VALUES ('$FehaContrata', '$personaId','$Gerente')";
+        if (mysqli_query($conexion, $sqlEmpleado)) {
+            // Obtener el ID del empleado recién creado
+            $empleadoId = mysqli_insert_id($conexion);
 
-
-        // Insertar en la tabla PERSONA
-        $sqlPersona = "INSERT INTO PERSONA (PNombre, SNombre, PApellido, SApellido, Direccion, correo, sexo, Identidad, RTN, TELEFONO_ID, Fecha_Nacimiento)
-                       VALUES ('$PNombre', '$SNombre', '$PApellido', '$SApellido', '$Direccion', '$correo', '$sexo', '$Identidad', '$RTN', '$telefonoId', '$FechaNaci')";
-
-        if (mysqli_query($conexion, $sqlPersona)) {
-            // Obtener el ID generado en PERSONA
-            $personaId = mysqli_insert_id($conexion);
-
-            // Insertar en la tabla Empleado
-            $sqEmpleado = "INSERT INTO empleado (Fecha_Contratacion, PERSONA_ID) 
-                           VALUES ('$FehaContrata', '$personaId')";
-
-            if (mysqli_query($conexion, $sqlEmpleado)) {
-              $sqEmpleadoId = mysqli_insert_id($conexion)
-
-              // Insertar en empleado_has_cargo
-        $sqlEmpleado_Cargo = "INSERT INTO empleado_has_cargo (EMPLEADO_ID, CARGO_ID) VALUES ('$sqEmpleadoId',)";
-
-              // Insertar en empleado_has_especialidad
-              $sqlEmpleado_Especi = "INSERT INTO empleado_has_cargo (EMPLEADO_ID, ESPECIALIDAD_ID) VALUES ('$sqEmpleadoId',)";
-        
-
-                echo "Datos insertados correctamente en las tablas PERSONA, TELEFONO y Empleado.";
-            } else {
-                echo "Error al insertar en la tabla Empleado: " . mysqli_error($conexion);
+         
+            $sqlEmpleadoCargo = "INSERT INTO EMPLEADO_has_CARGO (EMPLEADO_ID, CARGO_ID, Fecha_Inicio, Fecha_Fin) 
+                                 VALUES ('$empleadoId', '$Cargo', '$FechaInicio', '$Fechafin')";
+            if (!mysqli_query($conexion, $sqlEmpleadoCargo)) {
+                echo "Error al insertar en EMPLEADO_has_CARGO: " . mysqli_error($conexion);
             }
+
+    
+            if (!empty($Especi)) { // Verifica si $Especi no está vacío
+              $sqlEmpleadoEspecialidad = "INSERT INTO EMPLEADO_has_ESPECIALIDAD (EMPLEADO_ID, ESPECIALIDAD_ID)  
+                                           VALUES ('$empleadoId', '$Especi')";
+              if (!mysqli_query($conexion, $sqlEmpleadoEspecialidad)) {
+                  echo "Error al insertar en EMPLEADO_has_ESPECIALIDAD: " . mysqli_error($conexion);
+              }
+          } else {
+              
+          }
+
+            echo "Datos insertados correctamente.";
         } else {
-            echo "Error al insertar en la tabla PERSONA: " . mysqli_error($conexion);
+            echo "Error al insertar en EMPLEADO: " . mysqli_error($conexion);
         }
     } else {
-        echo "Error al insertar en la tabla TELEFONO: " . mysqli_error($conexion);
+        echo "Error al insertar en PERSONA: " . mysqli_error($conexion);
     }
 }
 ?>
