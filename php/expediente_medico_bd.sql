@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2024 a las 03:22:53
+-- Tiempo de generación: 27-11-2024 a las 04:07:21
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,6 +32,27 @@ CREATE TABLE `area_trabajo` (
   `Descripcion` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `area_trabajo`
+--
+
+INSERT INTO `area_trabajo` (`ID`, `Descripcion`) VALUES
+(1, 'Atencion de emergencias medicas'),
+(2, 'Area de atencion para niños'),
+(3, 'Atención de problemas cardíacos'),
+(4, 'Área de atención de lesiones y fracturas'),
+(5, 'Análisis clínicos y pruebas de laboratorio'),
+(6, 'Imágenes y estudios radiológicos'),
+(7, 'Realización de intervenciones quirúrgicas'),
+(8, 'Atención de consultas médicas'),
+(9, 'Tratamiento y prevención del cáncer'),
+(10, 'Salud reproductiva de la mujer'),
+(11, 'Atención de salud mental'),
+(12, 'Unidad de cuidados intensivos'),
+(13, 'Dispensación de medicamentos'),
+(14, 'Gestión administrativa del hospital'),
+(15, 'Terapia física y ocupacional');
+
 -- --------------------------------------------------------
 
 --
@@ -50,7 +71,7 @@ CREATE TABLE `cargo` (
 
 INSERT INTO `cargo` (`ID`, `Nombre`, `Estado`) VALUES
 (1, 'Administrador', 'A'),
-(2, 'Doctor', 'A'),
+(2, 'Médico General', 'A'),
 (3, 'Enfermera', 'A'),
 (4, 'Recepcionista', 'A'),
 (5, 'Farmacéutico', 'A'),
@@ -78,8 +99,7 @@ CREATE TABLE `cita_medica` (
   `Fecha_Hora` datetime DEFAULT NULL,
   `Observaciones` varchar(80) DEFAULT NULL,
   `ESTADO` varchar(1) DEFAULT NULL,
-  `HABITACIONES_ID` int(11) DEFAULT NULL,
-  `ID_HISTORIAL` int(11) DEFAULT NULL
+  `HABITACIONES_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -123,17 +143,6 @@ CREATE TABLE `consultas_medica_has_pruebas_diagnostico` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `contactos_emergencia`
---
-
-CREATE TABLE `contactos_emergencia` (
-  `ID` int(11) NOT NULL,
-  `Persona_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `departamento`
 --
 
@@ -141,27 +150,6 @@ CREATE TABLE `departamento` (
   `ID` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `departamento`
---
-
-INSERT INTO `departamento` (`ID`, `Nombre`) VALUES
-(1, 'Atlántida'),
-(2, 'Colón'),
-(3, 'Comayagua'),
-(4, 'Copán'),
-(5, 'Cortés'),
-(6, 'Choluteca'),
-(7, 'El Paraíso'),
-(8, 'Francisco Morazán'),
-(9, 'Gracias a Dios'),
-(10, 'Intibucá'),
-(11, 'Islas de la Bahía'),
-(12, 'La Paz'),
-(13, 'Lempira'),
-(14, 'Ocotepeque'),
-(15, 'Olancho');
 
 -- --------------------------------------------------------
 
@@ -259,17 +247,6 @@ INSERT INTO `empleado_has_cargo` (`EMPLEADO_ID`, `CARGO_ID`, `Fecha_Inicio`, `Fe
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleado_has_contacto`
---
-
-CREATE TABLE `empleado_has_contacto` (
-  `EMPLEADO_ID` int(11) NOT NULL,
-  `CONTACTO_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `empleado_has_especialidad`
 --
 
@@ -356,6 +333,27 @@ CREATE TABLE `habitacion` (
   `SALA_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `habitacion`
+--
+
+INSERT INTO `habitacion` (`ID`, `Numero`, `SALA_ID`) VALUES
+(1, 201, 1),
+(2, 202, 2),
+(3, 203, 3),
+(4, 204, 4),
+(5, 205, 5),
+(6, 206, 6),
+(7, 207, 7),
+(8, 208, 8),
+(9, 209, 9),
+(10, 210, 10),
+(11, 211, 11),
+(12, 212, 12),
+(13, 213, 13),
+(14, 214, 14),
+(15, 215, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -369,27 +367,6 @@ CREATE TABLE `historial_medico` (
   `Observaciones` varchar(80) DEFAULT NULL,
   `Paciente_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `historial_medico`
---
-
-INSERT INTO `historial_medico` (`ID`, `Fecha_Inicio`, `Fecha`, `Observaciones`, `Paciente_ID`) VALUES
-(1, '2023-01-01', '2023-06-01', 'Sin observaciones', 1),
-(2, '2023-02-01', '2023-07-01', 'Control de diabetes', 2),
-(3, '2023-03-01', '2023-08-01', 'Revisión general', 3),
-(4, '2023-04-01', '2023-09-01', 'Consulta por hipertensión', 4),
-(5, '2023-05-01', '2023-10-01', 'Rehabilitación física', 5),
-(6, '2023-06-01', '2023-11-01', 'Control postoperatorio', 6),
-(7, '2023-07-01', '2023-12-01', 'Chequeo por colesterol alto', 7),
-(8, '2023-08-01', '2024-01-01', 'Consulta por alergias', 8),
-(9, '2023-09-01', '2024-02-01', 'Revisión de respiración', 9),
-(10, '2023-10-01', '2024-03-01', 'Control de peso', 10),
-(11, '2023-11-01', '2024-04-01', 'Examen de visión', 11),
-(12, '2023-12-01', '2024-05-01', 'Chequeo de oídos', 12),
-(13, '2024-01-01', '2024-06-01', 'Consulta por estrés', 13),
-(14, '2024-02-01', '2024-07-01', 'Control de glicemia', 14),
-(15, '2024-03-01', '2024-08-01', 'Revisión de articulaciones', 15);
 
 -- --------------------------------------------------------
 
@@ -478,17 +455,6 @@ INSERT INTO `paciente` (`ID`, `PERSONA_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paciente_has_contacto_emergencia`
---
-
-CREATE TABLE `paciente_has_contacto_emergencia` (
-  `PACIENTE_ID` int(11) NOT NULL,
-  `CONTACTOS_EMERGENCIA_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `paciente_has_poliza`
 --
 
@@ -527,29 +493,30 @@ CREATE TABLE `persona` (
   `sexo` varchar(45) DEFAULT NULL,
   `Identidad` varchar(25) DEFAULT NULL,
   `RTN` varchar(25) DEFAULT NULL,
-  `TELEFONO_ID` int(11) DEFAULT NULL
+  `Fecha_Nacim` date DEFAULT NULL,
+  `Numero_Emergencia` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `persona`
 --
 
-INSERT INTO `persona` (`ID`, `PNombre`, `SNombre`, `PApellido`, `SApellido`, `Direccion`, `correo`, `sexo`, `Identidad`, `RTN`, `TELEFONO_ID`) VALUES
-(1, 'Juan', 'Carlos', 'Pérez', 'Gómez', 'Av. Central 101', 'juan.perez@example.com', 'M', '0801199912345', '08011999012345', 1),
-(2, 'Ana', 'María', 'López', 'Rodríguez', 'Calle 5 No. 20', 'ana.lopez@example.com', 'F', '0802199912346', '08021999012346', 2),
-(3, 'Pedro', 'Luis', 'Martínez', 'Santos', 'Col. El Bosque', 'pedro.martinez@example.com', 'M', '0803199912347', '08031999012347', 3),
-(4, 'Lucía', 'Elena', 'García', 'Ruiz', 'Col. Las Colinas', 'lucia.garcia@example.com', 'F', '0804199912348', '08041999012348', 4),
-(5, 'Carlos', 'Eduardo', 'Hernández', 'Fernández', 'Resid. La Primavera', 'carlos.hernandez@example.com', 'M', '0805199912349', '08051999012349', 5),
-(6, 'María', 'Isabel', 'Mejía', 'Torres', 'Barrio Abajo', 'maria.mejia@example.com', 'F', '0806199912350', '08061999012350', 6),
-(7, 'José', 'Manuel', 'Castro', 'Alvarado', 'Barrio Cabañas', 'jose.castro@example.com', 'M', '0807199912351', '08071999012351', 7),
-(8, 'Rosa', 'Beatriz', 'Suárez', 'Cruz', 'Resid. Monte Verde', 'rosa.suarez@example.com', 'F', '0808199912352', '08081999012352', 8),
-(9, 'Miguel', 'Ángel', 'Ortega', 'López', 'Barrio El Centro', 'miguel.ortega@example.com', 'M', '0809199912353', '08091999012353', 9),
-(10, 'Sofía', 'Gabriela', 'Mendoza', 'Lara', 'Resid. El Hatillo', 'sofia.mendoza@example.com', 'F', '0810199912354', '08101999012354', 10),
-(11, 'Roberto', 'Tomás', 'Ramírez', 'García', 'Resid. Santa Lucía', 'roberto.ramirez@example.com', 'M', '0811199912355', '08111999012355', 11),
-(12, 'Elena', 'Patricia', 'Gómez', 'Torres', 'Col. El Pedregal', 'elena.gomez@example.com', 'F', '0812199912356', '08121999012356', 12),
-(13, 'Alberto', 'Ignacio', 'Sánchez', 'Romero', 'Col. El Paraíso', 'alberto.sanchez@example.com', 'M', '0813199912357', '08131999012357', 13),
-(14, 'Carmen', 'Teresa', 'Reyes', 'García', 'Av. Bolívar 250', 'carmen.reyes@example.com', 'F', '0814199912358', '08141999012358', 14),
-(15, 'Raúl', 'Antonio', 'Díaz', 'Morales', 'Resid. Los Pinos', 'raul.diaz@example.com', 'M', '0815199912359', '08151999012359', 15);
+INSERT INTO `persona` (`ID`, `PNombre`, `SNombre`, `PApellido`, `SApellido`, `Direccion`, `correo`, `sexo`, `Identidad`, `RTN`, `Fecha_Nacim`, `Numero_Emergencia`) VALUES
+(1, 'Juan', 'Carlos', 'Pérez', 'Gómez', 'Av. Central 101', 'juan.perez@example.com', 'M', '0801199912345', '08011999012345', NULL, NULL),
+(2, 'Ana', 'María', 'López', 'Rodríguez', 'Calle 5 No. 20', 'ana.lopez@example.com', 'F', '0802199912346', '08021999012346', NULL, NULL),
+(3, 'Pedro', 'Luis', 'Martínez', 'Santos', 'Col. El Bosque', 'pedro.martinez@example.com', 'M', '0803199912347', '08031999012347', NULL, NULL),
+(4, 'Lucía', 'Elena', 'García', 'Ruiz', 'Col. Las Colinas', 'lucia.garcia@example.com', 'F', '0804199912348', '08041999012348', NULL, NULL),
+(5, 'Carlos', 'Eduardo', 'Hernández', 'Fernández', 'Resid. La Primavera', 'carlos.hernandez@example.com', 'M', '0805199912349', '08051999012349', NULL, NULL),
+(6, 'María', 'Isabel', 'Mejía', 'Torres', 'Barrio Abajo', 'maria.mejia@example.com', 'F', '0806199912350', '08061999012350', NULL, NULL),
+(7, 'José', 'Manuel', 'Castro', 'Alvarado', 'Barrio Cabañas', 'jose.castro@example.com', 'M', '0807199912351', '08071999012351', NULL, NULL),
+(8, 'Rosa', 'Beatriz', 'Suárez', 'Cruz', 'Resid. Monte Verde', 'rosa.suarez@example.com', 'F', '0808199912352', '08081999012352', NULL, NULL),
+(9, 'Miguel', 'Ángel', 'Ortega', 'López', 'Barrio El Centro', 'miguel.ortega@example.com', 'M', '0809199912353', '08091999012353', NULL, NULL),
+(10, 'Sofía', 'Gabriela', 'Mendoza', 'Lara', 'Resid. El Hatillo', 'sofia.mendoza@example.com', 'F', '0810199912354', '08101999012354', NULL, NULL),
+(11, 'Roberto', 'Tomás', 'Ramírez', 'García', 'Resid. Santa Lucía', 'roberto.ramirez@example.com', 'M', '0811199912355', '08111999012355', NULL, NULL),
+(12, 'Elena', 'Patricia', 'Gómez', 'Torres', 'Col. El Pedregal', 'elena.gomez@example.com', 'F', '0812199912356', '08121999012356', NULL, NULL),
+(13, 'Alberto', 'Ignacio', 'Sánchez', 'Romero', 'Col. El Paraíso', 'alberto.sanchez@example.com', 'M', '0813199912357', '08131999012357', NULL, NULL),
+(14, 'Carmen', 'Teresa', 'Reyes', 'García', 'Av. Bolívar 250', 'carmen.reyes@example.com', 'F', '0814199912358', '08141999012358', NULL, NULL),
+(15, 'Raúl', 'Antonio', 'Díaz', 'Morales', 'Resid. Los Pinos', 'raul.diaz@example.com', 'M', '0815199912359', '08151999012359', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -604,6 +571,27 @@ CREATE TABLE `sala` (
   `Area_Trabajo_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `sala`
+--
+
+INSERT INTO `sala` (`ID`, `Numero`, `Area_Trabajo_ID`) VALUES
+(1, 101, 1),
+(2, 102, 2),
+(3, 103, 3),
+(4, 104, 4),
+(5, 105, 5),
+(6, 106, 6),
+(7, 107, 7),
+(8, 108, 8),
+(9, 109, 9),
+(10, 110, 10),
+(11, 111, 11),
+(12, 112, 12),
+(13, 113, 13),
+(14, 114, 14),
+(15, 115, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -612,29 +600,31 @@ CREATE TABLE `sala` (
 
 CREATE TABLE `telefono` (
   `ID` int(11) NOT NULL,
-  `Numero` varchar(45) DEFAULT NULL
+  `Numero` varchar(45) DEFAULT NULL,
+  `Persona_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `telefono`
 --
 
-INSERT INTO `telefono` (`ID`, `Numero`) VALUES
-(1, '50412345678'),
-(2, '50487654321'),
-(3, '50423456789'),
-(4, '50498765432'),
-(5, '50434567890'),
-(6, '50476543210'),
-(7, '50445678901'),
-(8, '50465432109'),
-(9, '50456789012'),
-(10, '50467890123'),
-(11, '50478901234'),
-(12, '50489012345'),
-(13, '50490123456'),
-(14, '50401234567'),
-(15, '50467812345');
+INSERT INTO `telefono` (`ID`, `Numero`, `Persona_ID`) VALUES
+(1, '50412345678', 1),
+(2, '50487654321', 2),
+(3, '50423456789', 3),
+(4, '50498765432', 4),
+(5, '50434567890', 5),
+(6, '50476543210', 6),
+(7, '50445678901', 7),
+(8, '50465432109', 8),
+(9, '50456789012', 9),
+(10, '50467890123', 10),
+(11, '50478901234', 11),
+(12, '50489012345', 12),
+(13, '50490123456', 13),
+(14, '50401234567', 14),
+(15, '50467812345', 15),
+(16, '8824-5624', 1);
 
 -- --------------------------------------------------------
 
@@ -647,27 +637,6 @@ CREATE TABLE `tipos_hospital` (
   `Descripcion` varchar(45) DEFAULT NULL,
   `Estado` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `tipos_hospital`
---
-
-INSERT INTO `tipos_hospital` (`ID`, `Descripcion`, `Estado`) VALUES
-(1, 'Clínica General', 'A'),
-(2, 'Clínica Especializada', 'A'),
-(3, 'Hospital Público', 'A'),
-(4, 'Hospital Privado', 'A'),
-(5, 'Centro de Salud', 'A'),
-(6, 'Dispensario', 'A'),
-(7, 'Clínica Dental', 'A'),
-(8, 'Centro de Rehabilitación', 'A'),
-(9, 'Clínica Oftalmológica', 'A'),
-(10, 'Centro de Urgencias', 'A'),
-(11, 'Clínica Pediátrica', 'A'),
-(12, 'Centro de Diagnóstico', 'A'),
-(13, 'Centro Oncológico', 'A'),
-(14, 'Hospital Militar', 'A'),
-(15, 'Clínica Psiquiátrica', 'A');
 
 -- --------------------------------------------------------
 
@@ -741,8 +710,7 @@ ALTER TABLE `cita_medica`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `PACIENTE_ID` (`PACIENTE_ID`),
   ADD KEY `DOCTOR_ID` (`DOCTOR_ID`),
-  ADD KEY `HABITACIONES_ID` (`HABITACIONES_ID`),
-  ADD KEY `FK_IDHISTORIAL` (`ID_HISTORIAL`);
+  ADD KEY `HABITACIONES_ID` (`HABITACIONES_ID`);
 
 --
 -- Indices de la tabla `ciudad`
@@ -768,13 +736,6 @@ ALTER TABLE `consultas_medica_has_pruebas_diagnostico`
   ADD KEY `Pruebas_diagnostico_ID` (`Pruebas_diagnostico_ID`);
 
 --
--- Indices de la tabla `contactos_emergencia`
---
-ALTER TABLE `contactos_emergencia`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `Persona_ID` (`Persona_ID`);
-
---
 -- Indices de la tabla `departamento`
 --
 ALTER TABLE `departamento`
@@ -791,8 +752,8 @@ ALTER TABLE `diagnostico`
 --
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `Gerente_ID` (`Gerente_ID`),
-  ADD KEY `Persona_ID` (`Persona_ID`);
+  ADD KEY `Persona_ID` (`Persona_ID`),
+  ADD KEY `fk_Gerente_ID` (`Gerente_ID`);
 
 --
 -- Indices de la tabla `empleado_has_area_trabajo`
@@ -807,13 +768,6 @@ ALTER TABLE `empleado_has_area_trabajo`
 ALTER TABLE `empleado_has_cargo`
   ADD PRIMARY KEY (`EMPLEADO_ID`,`CARGO_ID`),
   ADD KEY `CARGO_ID` (`CARGO_ID`);
-
---
--- Indices de la tabla `empleado_has_contacto`
---
-ALTER TABLE `empleado_has_contacto`
-  ADD PRIMARY KEY (`EMPLEADO_ID`,`CONTACTO_ID`),
-  ADD KEY `CONTACTO_ID` (`CONTACTO_ID`);
 
 --
 -- Indices de la tabla `empleado_has_especialidad`
@@ -898,13 +852,6 @@ ALTER TABLE `paciente`
   ADD KEY `PERSONA_ID` (`PERSONA_ID`);
 
 --
--- Indices de la tabla `paciente_has_contacto_emergencia`
---
-ALTER TABLE `paciente_has_contacto_emergencia`
-  ADD PRIMARY KEY (`PACIENTE_ID`,`CONTACTOS_EMERGENCIA_ID`),
-  ADD KEY `CONTACTOS_EMERGENCIA_ID` (`CONTACTOS_EMERGENCIA_ID`);
-
---
 -- Indices de la tabla `paciente_has_poliza`
 --
 ALTER TABLE `paciente_has_poliza`
@@ -922,8 +869,7 @@ ALTER TABLE `pago`
 -- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `TELEFONO_ID` (`TELEFONO_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indices de la tabla `poliza`
@@ -955,7 +901,8 @@ ALTER TABLE `sala`
 -- Indices de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Persona_ID` (`Persona_ID`);
 
 --
 -- Indices de la tabla `tipos_hospital`
@@ -988,6 +935,184 @@ ALTER TABLE `tipo_poliza`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `area_trabajo`
+--
+ALTER TABLE `area_trabajo`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `cargo`
+--
+ALTER TABLE `cargo`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `cita_medica`
+--
+ALTER TABLE `cita_medica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ciudad`
+--
+ALTER TABLE `ciudad`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `consultas_medica`
+--
+ALTER TABLE `consultas_medica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `departamento`
+--
+ALTER TABLE `departamento`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `diagnostico`
+--
+ALTER TABLE `diagnostico`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `especialidad`
+--
+ALTER TABLE `especialidad`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `estudios_especializado`
+--
+ALTER TABLE `estudios_especializado`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `habitacion`
+--
+ALTER TABLE `habitacion`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `historial_medico`
+--
+ALTER TABLE `historial_medico`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `hospital_clinica`
+--
+ALTER TABLE `hospital_clinica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `intervencion_quirurgica`
+--
+ALTER TABLE `intervencion_quirurgica`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `municipio`
+--
+ALTER TABLE `municipio`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `pago`
+--
+ALTER TABLE `pago`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `persona`
+--
+ALTER TABLE `persona`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `poliza`
+--
+ALTER TABLE `poliza`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pruebas_diagnostico`
+--
+ALTER TABLE `pruebas_diagnostico`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `receta`
+--
+ALTER TABLE `receta`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sala`
+--
+ALTER TABLE `sala`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `telefono`
+--
+ALTER TABLE `telefono`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_hospital`
+--
+ALTER TABLE `tipos_hospital`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_estudio`
+--
+ALTER TABLE `tipo_estudio`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_intervencion`
+--
+ALTER TABLE `tipo_intervencion`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_poliza`
+--
+ALTER TABLE `tipo_poliza`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -995,7 +1120,6 @@ ALTER TABLE `tipo_poliza`
 -- Filtros para la tabla `cita_medica`
 --
 ALTER TABLE `cita_medica`
-  ADD CONSTRAINT `FK_IDHISTORIAL` FOREIGN KEY (`ID_HISTORIAL`) REFERENCES `historial_medico` (`ID`),
   ADD CONSTRAINT `cita_medica_ibfk_1` FOREIGN KEY (`PACIENTE_ID`) REFERENCES `paciente` (`ID`),
   ADD CONSTRAINT `cita_medica_ibfk_2` FOREIGN KEY (`DOCTOR_ID`) REFERENCES `empleado` (`ID`),
   ADD CONSTRAINT `cita_medica_ibfk_3` FOREIGN KEY (`HABITACIONES_ID`) REFERENCES `habitacion` (`ID`);
@@ -1022,17 +1146,11 @@ ALTER TABLE `consultas_medica_has_pruebas_diagnostico`
   ADD CONSTRAINT `consultas_medica_has_pruebas_diagnostico_ibfk_2` FOREIGN KEY (`Pruebas_diagnostico_ID`) REFERENCES `pruebas_diagnostico` (`ID`);
 
 --
--- Filtros para la tabla `contactos_emergencia`
---
-ALTER TABLE `contactos_emergencia`
-  ADD CONSTRAINT `contactos_emergencia_ibfk_1` FOREIGN KEY (`Persona_ID`) REFERENCES `persona` (`ID`);
-
---
 -- Filtros para la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`Gerente_ID`) REFERENCES `empleado` (`ID`),
-  ADD CONSTRAINT `empleado_ibfk_2` FOREIGN KEY (`Persona_ID`) REFERENCES `persona` (`ID`);
+  ADD CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`Persona_ID`) REFERENCES `persona` (`ID`),
+  ADD CONSTRAINT `fk_Gerente_ID` FOREIGN KEY (`Gerente_ID`) REFERENCES `empleado` (`ID`);
 
 --
 -- Filtros para la tabla `empleado_has_area_trabajo`
@@ -1047,13 +1165,6 @@ ALTER TABLE `empleado_has_area_trabajo`
 ALTER TABLE `empleado_has_cargo`
   ADD CONSTRAINT `empleado_has_cargo_ibfk_1` FOREIGN KEY (`EMPLEADO_ID`) REFERENCES `empleado` (`ID`),
   ADD CONSTRAINT `empleado_has_cargo_ibfk_2` FOREIGN KEY (`CARGO_ID`) REFERENCES `cargo` (`ID`);
-
---
--- Filtros para la tabla `empleado_has_contacto`
---
-ALTER TABLE `empleado_has_contacto`
-  ADD CONSTRAINT `empleado_has_contacto_ibfk_1` FOREIGN KEY (`EMPLEADO_ID`) REFERENCES `empleado` (`ID`),
-  ADD CONSTRAINT `empleado_has_contacto_ibfk_2` FOREIGN KEY (`CONTACTO_ID`) REFERENCES `contactos_emergencia` (`ID`);
 
 --
 -- Filtros para la tabla `empleado_has_especialidad`
@@ -1124,13 +1235,6 @@ ALTER TABLE `paciente`
   ADD CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`PERSONA_ID`) REFERENCES `persona` (`ID`);
 
 --
--- Filtros para la tabla `paciente_has_contacto_emergencia`
---
-ALTER TABLE `paciente_has_contacto_emergencia`
-  ADD CONSTRAINT `paciente_has_contacto_emergencia_ibfk_1` FOREIGN KEY (`PACIENTE_ID`) REFERENCES `paciente` (`ID`),
-  ADD CONSTRAINT `paciente_has_contacto_emergencia_ibfk_2` FOREIGN KEY (`CONTACTOS_EMERGENCIA_ID`) REFERENCES `contactos_emergencia` (`ID`);
-
---
 -- Filtros para la tabla `paciente_has_poliza`
 --
 ALTER TABLE `paciente_has_poliza`
@@ -1144,12 +1248,6 @@ ALTER TABLE `pago`
   ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`TIPO_PAGO_ID`) REFERENCES `tipo_pago` (`ID`);
 
 --
--- Filtros para la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`TELEFONO_ID`) REFERENCES `telefono` (`ID`);
-
---
 -- Filtros para la tabla `poliza`
 --
 ALTER TABLE `poliza`
@@ -1160,6 +1258,12 @@ ALTER TABLE `poliza`
 --
 ALTER TABLE `sala`
   ADD CONSTRAINT `sala_ibfk_1` FOREIGN KEY (`Area_Trabajo_ID`) REFERENCES `area_trabajo` (`ID`);
+
+--
+-- Filtros para la tabla `telefono`
+--
+ALTER TABLE `telefono`
+  ADD CONSTRAINT `telefono_ibfk_1` FOREIGN KEY (`Persona_ID`) REFERENCES `persona` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -256,17 +256,18 @@ if ($consulta->num_rows > 0) {
             <td class='px-13 py-4'>{$row['Fecha_Fin']}</td>
             <td class='px-10 py-4'>{$row['Estado_Cargo']}</td>
             <td class='px-8 py-4'>{$row['Telefonos']}</td>
-             <td class='px-4 py-4'>
-                <a href='' 
-                   class='text-blue-500 hover:underline'>
+            <td class='px-4 py-4'>
+                <a href='updateEmpleado.php?id={$row['Empleado_ID']}' 
+                   class='btn btn-warning'>
                     Modificar
                 </a>
             </td>
         </tr>";
     }
 } else {
-    echo "<tr><td colspan='8' class='text-center'>No se encontraron resultados</td></tr>";
+    echo "<tr><td colspan='9' class='text-center'>No se encontraron resultados</td></tr>";
 }
+
 ?>
 
 
